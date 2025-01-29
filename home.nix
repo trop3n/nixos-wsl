@@ -15,6 +15,10 @@
     du-dust
     fd
     findutils
+    binutils
+    inetutils
+    gcc
+    libgcc
     fx
     git
     git-crypt
@@ -38,6 +42,8 @@
     helix
     neovim
     lazygit
+    zellij
+#    oh-my-posh
   ];
 
   stable-packages = with pkgs; [
@@ -55,14 +61,22 @@
 
     # core languages
     rustup
-    python312Full
     ruby_3_3
     crystal_1_9
     zig
-    elixir_1_15
+    elixir_1_16
     gleam
     go
     nodejs_18
+    php
+    scala
+    nim
+
+
+    # python stuff
+    python312Full
+    poetry
+    python312Packages.scrapy
 
     # rust stuff
     cargo-cache
@@ -93,7 +107,7 @@ in {
     nix-index-database.hmModules.nix-index
   ];
 
-  home.stateVersion = "22.11";
+  home.stateVersion = "24.05";
 
   home = {
     username = "${username}";
@@ -266,6 +280,84 @@ in {
           name = "sponge";
         }
       ];
+    };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      plugins = [
+        {
+          name = "zsh-autosuggestions";
+          src = pkgs.fetchFromGitHub {
+            owner = "zsh-users";
+            repo = "zsh-autosuggestions";
+            rev = "v0.7.1";
+            sha256 = "0z6i9wjjklb4lvr7zjhbphibsyx51psv50gm07mbb0kj9058j6kc";
+          };
+        }
+        {
+          name = "geometry";
+          src = pkgs.fetchFromGitHub {
+            owner = "geometry-zsh";
+            repo = "geometry";
+            rev = "master";
+            sha256 = "02knbmcf8invkvz0g42xk3dlk4lqffk43bsmi8z4n01508jqkd8g";
+          };
+        }
+        {
+          name = "zsh-async";
+          src = pkgs.fetchFromGitHub {
+            owner = "mafredri";
+            repo = "zsh-async";
+            rev = "v1.8.6"; # Use the latest release
+            sha256 = "09wlqghxczndmzpr5hgqlf90yhbbi4mh8k0179arplikgbfd75cs";
+          };
+        }
+    ];
+      oh-my-zsh = {
+        enable = true;
+        theme = "geometry";
+        plugins = [
+          "docker"
+          "git"
+          "git-prompt"
+          "fzf"
+          "flutter"
+          "direnv"
+          "pip"
+          "poetry"
+          "python"
+          "rust"
+          "poetry-env"
+          "starship"
+          "sudo"
+          "zoxide"
+          "nmap"
+        ];
+      };
+/*       shellAliases = {
+        k = "kubectl";
+        urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+        urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+        ls = "exa --icons";
+        l = "exa --icons -lh";
+        ll = "exa --icons -lah";
+        la = "exa --icons -A";
+        lm = "exa --icons -m";
+        lr = "exa --icons -R";
+        lg = "exa --icons -l --group-directories-first";
+        gcl = "git clone --depth 1";
+        gi = "git init";
+        ga = "git add";
+        gc = "git commit -m";
+        gp = "git push origin master";
+      }; */
+    };
+    oh-my-posh = {
+      enable = false;
+      enableBashIntegration = true;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
+      useTheme = "emodipt-extend";
     };
   };
 }
