@@ -42,8 +42,13 @@
     helix
     neovim
     lazygit
+<<<<<<< HEAD
     zellij
 #    oh-my-posh
+||||||| 80d3a34
+=======
+#    oh-my-posh
+>>>>>>> c5c07fb5d9d5bfadbac7d6c51e90fecfcc9143bd
   ];
 
   stable-packages = with pkgs; [
