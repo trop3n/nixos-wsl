@@ -77,7 +77,7 @@
     python312Full
     poetry
     python312Packages.scrapy
-    python312Packages.conda.out
+    python312Packages.conda
 
     # rust stuff
     cargo-cache
@@ -108,7 +108,7 @@ in {
     nix-index-database.hmModules.nix-index
   ];
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   home = {
     username = "${username}";
