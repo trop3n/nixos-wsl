@@ -17,6 +17,7 @@
     findutils
     binutils
     inetutils
+    lsof
     gcc
     libgcc
     fx
@@ -39,16 +40,10 @@
     fastfetch
     gdb
     micro
-    helix
     neovim
     lazygit
-<<<<<<< HEAD
     zellij
 #    oh-my-posh
-||||||| 80d3a34
-=======
-#    oh-my-posh
->>>>>>> c5c07fb5d9d5bfadbac7d6c51e90fecfcc9143bd
   ];
 
   stable-packages = with pkgs; [
@@ -82,6 +77,7 @@
     python312Full
     poetry
     python312Packages.scrapy
+    python312Packages.conda.out
 
     # rust stuff
     cargo-cache
@@ -362,7 +358,37 @@ in {
       enableBashIntegration = true;
       enableFishIntegration = false;
       enableZshIntegration = false;
-      useTheme = "emodipt-extend";
+      useTheme = "tiwahu";
+    };
+
+    helix = {
+      enable = true;
+      settings = {
+      theme = "monokai-pro";
+        editor = {
+          color-modes = true;
+          completion-trigger-len = 1;
+          completion-replace = true;
+          cursorline = true;
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
+          indent-guides.render = true;
+          # inline-diagnostics = {
+          #   cursorline = "hint";
+          #   other-lines = "error";
+          # };
+          lsp.display-inlay-hints = true;
+          statusline.center = ["position-percentage"];
+          true-color = true;
+          whitespace.characters = {
+            newline = "↴";
+            tab = "⇥";
+          };
+        };
+      };
     };
   };
 }
